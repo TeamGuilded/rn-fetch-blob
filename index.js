@@ -224,7 +224,9 @@ function fetch(...args:any):Promise {
   // # 241 normalize null or undefined headers, in case nil or null string
   // pass to native context
   headers = Object.keys(headers).reduce((result, key) => {
-    result[key] = value || ''     result[key] = headers[key] || ''
+    result[key] = headers[key] || ''
+    return result
+  }, {});
 
   // fetch from file system
   if(URIUtil.isFileURI(url)) {
